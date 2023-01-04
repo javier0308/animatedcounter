@@ -1,3 +1,4 @@
+import 'package:contador/preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
 class CounterScreen extends StatefulWidget {
@@ -8,23 +9,23 @@ class CounterScreen extends StatefulWidget {
 }
 
 class _CounterScreenState extends State<CounterScreen> {
-  int _counter = 0;
+  // int _counter = Preferences.counter;
   int? _oldcounter;
 
   void increment() {
-    _counter++;
+    Preferences.counter++;
     setState(() {});
   }
 
   void decrecer() {
-    if (_counter > 0) {
-      _counter--;
+    if (Preferences.counter > 0) {
+      Preferences.counter--;
     }
     setState(() {});
   }
 
   void reset() {
-    _counter = 0;
+    Preferences.counter = 0;
     setState(() {});
   }
 
@@ -50,7 +51,7 @@ class _CounterScreenState extends State<CounterScreen> {
             ),
             TweenAnimationBuilder<double>(
               tween: Tween(begin: 0.0, end: 1.0),
-              key: Key(_counter.toString()),
+              key: Key(Preferences.counter.toString()),
               duration: const Duration(milliseconds: 700),
               builder: (context, value, _) {
                 return Stack(
@@ -72,7 +73,7 @@ class _CounterScreenState extends State<CounterScreen> {
                       child: Transform.translate(
                         offset: Offset(-50 * (1 - value), 0.0),
                         child: Text(
-                          _counter.toString(),
+                          Preferences.counter.toString(),
                           style: const TextStyle(fontSize: 80),
                         ),
                       ),
